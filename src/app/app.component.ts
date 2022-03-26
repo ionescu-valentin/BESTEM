@@ -1,19 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'bestem';
 
-  constructor(
-    private toastrService: ToastrService,
-  ) {}
-
-  ngOnInit(): void {
-      this.toastrService.success('hello');
-  }
 }

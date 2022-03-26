@@ -1,8 +1,10 @@
-export enum Modals {}
+export enum Modals {
+  TEST_MODAL
+}
 
 export const MODALS_STYLES = [
   {
-    name: '',
+    name: Modals.TEST_MODAL,
     style: {
       width: '500px',
       height: 'auto',

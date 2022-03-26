@@ -1,0 +1,15 @@
+<nz-layout>
+  <app-header></app-header>
+  <nz-layout>
+    <div class="d-flex page-container">
+    <app-sidebar></app-sidebar>
+    <nz-layout class="inner-layout mt-4">
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </div>
+  </nz-layout>
+</nz-layout>
+<app-modals-container></app-modals-container>
+

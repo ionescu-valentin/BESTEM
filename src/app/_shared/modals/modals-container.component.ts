@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ModalsService } from 'src/app/_core/services/modals.service';
 import { Modals, MODALS_STYLES, MODAL_RESPONSE } from 'src/app/_core/constants/Modals';
+import { HomepageComponent } from 'src/app/internal-app/homepage/homepage.component';
 
 @Component({
   selector: 'app-modals-container',
-  template: ''
+  template: `
+  `,
 })
-export class ModalsContainerComponent implements OnInit {
+export class ModalsContainerComponent implements OnDestroy {
   modalRef: MatDialogRef<any>;
   modalSubscription: Subscription;
 
@@ -24,7 +26,7 @@ export class ModalsContainerComponent implements OnInit {
           this.dialog.closeAll();
           return;
         default:
-          this.setModal(response.modalName);
+         this.setModal(response.modalName);
       }
       this.modalRef.backdropClick().subscribe(() => {
         this.closeModal();
@@ -33,7 +35,8 @@ export class ModalsContainerComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  ngOnDestroy() {
+    this.modalSubscription.unsubscribe();
   }
 
   emitCloseEvent(event): void {
@@ -43,12 +46,15 @@ export class ModalsContainerComponent implements OnInit {
   }
 
   setModal(response: any): void {
-    const style = MODALS_STYLES.find((modal) => modal.name === response).style;
-    switch (response) {
-      case '':
-        this.openModal('component', style, true);
-        break;
+    if(response !== undefined) {
+      const style = MODALS_STYLES.find((modal) => modal.name === response).style;
+      switch (response) {
+        case Modals.TEST_MODAL:
+          this.openModal(HomepageComponent, style, true);
+          break;
+      }
     }
+
   }
 
   openModal(modalComponent, style, disableClose: boolean = false, cancel: boolean = false): void {
